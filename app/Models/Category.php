@@ -4,25 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use App\Models\Posts; 
 
-class Posts extends Model
+class Category extends Model
 {
     protected $keyType = 'string';
 
     protected $fillable = [
-        'title', 'content', 'userid', 'categoryid'
+        'name',
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'userid');    
-    }
 
-    public function category()
+    public function posts()
     {
-        return $this->belongsTo(Category::class, 'categoryid');    
+        return $this->hasMany(Posts::class, 'categoryid', 'id');
     }
-
     protected static function booted()
     {
         static::creating(function ($post) {
