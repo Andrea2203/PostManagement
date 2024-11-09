@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->longText('content');
             $table->foreignUuid('userid')->constrained('users')->onDelete('cascade');
-            $table->foreignUuid('categoryid')->constrained('category')->onDelete('cascade');
+            $table->foreignUuid('categoryid')->constrained('categories')->onDelete('cascade');
             $table->timestamps();
         });
     }
