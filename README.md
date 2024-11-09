@@ -1,5 +1,5 @@
 # Prueba final para Desarrollador fullstack
-En el repositorio se encuentra el desarrollo del Backend de la prueba, la cual tiene funcionalidades como crear usuarios, inicio de sesión de usuarios, creación de post y listado de post a usuarios logeados
+En el repositorio se encuentra el desarrollo de la prueba, la cual tiene funcionalidades como crear usuarios, inicio de sesión de usuarios, creación de post y listado de post a usuarios logeados
 ## **Requisitos previos**:<br>
 Se requiere contar con PHP 8.3, composer y postgres.<br>
 ## **Pasos para la instalación**:
@@ -23,7 +23,23 @@ php artisan migrate
 5. Iniciar el servidor
 ```
 php artisan serve
+npm run dev
 ```
+## **Link para visualizar la aplicacion**:
+1. Inicio de sesión
+```
+http://127.0.0.1:8000/login
+```
+1. Registrarse
+```
+http://127.0.0.1:8000/register
+```
+1. Creacion y lista de Post
+```
+http://127.0.0.1:8000/posts
+```
+
+
 ## **Consumos que puede realizar**:
 ### 1. Crear un Usuario
 **POST** `/api/register`
