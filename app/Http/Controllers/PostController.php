@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Posts; 
+
 
 class PostController extends Controller
 {
@@ -34,15 +36,19 @@ class PostController extends Controller
      */
     public function create(Request $request)
     {
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
             'content' => 'required|string',
         ]);
+
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'errors' => $validator->errors()], 400);
+        }
         try {
 
             $post = Posts::create([
-                'title' => $validated['title'],
-                'content' => $validated['content'],
+                'title' => $request->title,
+                'content' => $request->content,
                 'userid' => Auth::id(),
             ]);
 
