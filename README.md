@@ -155,6 +155,57 @@ Authorization: Bearer token
                 "email_verified_at": null,
                 "created_at": "2024-11-09T04:38:00.000000Z",
                 "updated_at": "2024-11-09T04:38:00.000000Z"
+            },
+            "category": {
+                "id": "7cecb0b9-4de6-46fd-863f-4710d2ff6d69",
+                "name": "Comedia",
+                "created_at": "2024-11-09T06:20:50.000000Z",
+                "updated_at": "2024-11-09T06:20:50.000000Z"
+            }
+        }
+    ]
+}
+```
+#### Respuesta erronea:
+```json
+{
+    "success": false,
+    "message": "Error al traer los posts",
+    "error": "Error"
+}
+```
+### 4. Lista de Post por id de categoria
+**GET** `/api/posts/{categoryid}`
+
+#### Autorizacion:
+```
+Authorization: Bearer token
+```
+#### Respuesta correcta:
+```json
+{
+    "success": true,
+    "data": [
+         {
+            "id": 0,
+            "title": "Post Nuevo",
+            "content": "Este es un post",
+            "userid": "b15ddcd7-cd2d-4aa2-b9c0-86e7e54737b2",
+            "created_at": "2024-11-09T05:28:55.000000Z",
+            "updated_at": "2024-11-09T05:28:55.000000Z",
+            "user": {
+                "id": "b15ddcd7-cd2d-4aa2-b9c0-86e7e54737b2",
+                "name": "Juan Perez",
+                "email": "juan1@example.com",
+                "email_verified_at": null,
+                "created_at": "2024-11-09T04:38:00.000000Z",
+                "updated_at": "2024-11-09T04:38:00.000000Z"
+            },
+            "category": {
+                "id": "7cecb0b9-4de6-46fd-863f-4710d2ff6d69",
+                "name": "Comedia",
+                "created_at": "2024-11-09T06:20:50.000000Z",
+                "updated_at": "2024-11-09T06:20:50.000000Z"
             }
         }
     ]
@@ -169,3 +220,75 @@ Authorization: Bearer token
 }
 ```
 
+### 5. Crear una categoria
+**POST** `/api/category`
+
+#### Autorizacion:
+```
+Authorization: Bearer token
+```
+#### Parámetros (Body - JSON):
+```json
+{
+    "name": "Comedia",
+}
+```
+#### Respuesta correcta:
+```json
+{
+    "success": true,
+    "data": {
+        "name": "Comedia",
+        "id": "1f9d6fc6-6b12-4fd2-85ca-ea4c3b94d227",
+        "updated_at": "2024-11-09T06:39:30.000000Z",
+        "created_at": "2024-11-09T06:39:30.000000Z"
+    }
+}
+```
+#### Respuesta erronea:
+```json
+{
+    "success": false,
+    "errors": {
+        "name": [
+            "validation.required"
+        ]
+    }
+}
+```
+
+### 3. Lista de Categorias
+**GET** `/api/categories`
+
+#### Autorizacion:
+```
+Authorization: Bearer token
+```
+#### Respuesta correcta:
+```json
+{
+    "success": true,
+    "data": [
+        {
+            "id": "7cecb0b9-4de6-46fd-863f-4710d2ff6d69",
+            "name": "Acción",
+            "created_at": "2024-11-09T06:20:50.000000Z",
+            "updated_at": "2024-11-09T06:20:50.000000Z"
+        },
+        {
+            "id": "1f9d6fc6-6b12-4fd2-85ca-ea4c3b94d227",
+            "name": "Comedia",
+            "created_at": "2024-11-09T06:39:30.000000Z",
+            "updated_at": "2024-11-09T06:39:30.000000Z"
+        }
+    ]
+}
+```
+#### Respuesta erronea:
+```json
+{
+    "success": false,
+    "message": "Error al traer las categorias",
+    "error": "Error"
+}
+```
