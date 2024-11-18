@@ -1,15 +1,16 @@
-@extends('layouts.app')
+@extends('layouts.guest')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
 
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="card shadow-lg">
                 <div class="card-body">
                     <div class="container mx-auto flex flex-col items-center justify-center gap-6 px-4 md:px-6">
                         <div class="space-y-4 text-center">
-                            <h2 class="text-2xl font-bold tracking-tighter sm:text-2xl md:text-2xl">Bienvenido  <br>Por favor ingresar los datos para su registro</h2>
+                        <h2 class="text-2xl font-bold tracking-tighter sm:text-2xl md:text-2xl">Bienvenido</h2>
+                        <h5 class="text-2xl font-bold tracking-tighter sm:text-2xl md:text-2xl">Por favor ingresar los datos para su registro</h5>
                         </div>
                     </div>
                     <form id="registerForm">
@@ -45,14 +46,10 @@
                                 <span id="confirm_password"  hidden= true style="color: red;">Las contraseñas no coinciden.</span>
                             </div>
                         </div>
-                        <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit"  id="btn-registro" class="btn btn-primary ">
-                                    Registrate
-                                </button>
-
-
-                            </div>
+                        <div class="m-4">
+                            <button type="submit"  id="btn-registro" class="btn btn-outline-success">
+                            Registrate
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -67,7 +64,6 @@
             var val2 = document.getElementById(val2).value;
             var txt = document.getElementById(txt);
             var boton = document.getElementById(boton);
-            console.log(val1,val2)
             if (val1 == val2) {
                 txt.setAttribute("hidden", true);
                 boton.removeAttribute("disabled");
@@ -81,14 +77,33 @@
             e.preventDefault();
             const formData = new FormData(this); 
             axios.post('/api/register', formData)
-        .then(response => {
-                console.log('Usuario creado exitosamente:', response.data);
-                alert('Usuario creado exitosamente!');
+            .then(response => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Usuario creado exitosamente',
+                    confirmButtonText: 'Aceptar'
+                });
                 document.getElementById('registerForm').reset(); 
             })
             .catch(error => {
-                console.error('Hubo un error al crear el usuario:', error);
-                alert('Error al crear el usuario. Por favor, intenta de nuevo.');
+                var errors = error.response.data.errors;
+                var mensaje = "<ul>";
+                if (Object.keys(errors).length === 0) {
+                    mensaje = "<li>Error al registrar el usuario, intente de nuevo.</li>";
+                } else {
+                    for (var key in errors) {
+                        if (errors.hasOwnProperty(key)) {
+                            mensaje += errors[key].map(error => "<li>" + error + "</li>").join("");
+                        }
+                    }
+                }
+                mensaje += "</ul>";
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error al crear el usuario',
+                    html : mensaje,
+                    confirmButtonText: 'Aceptar'
+                });
             });
         });
 

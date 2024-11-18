@@ -19,6 +19,15 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
+        ], [
+            'name.required' => 'El nombre es obligatorio.',
+            'name.max' => 'El nombre debe tener maximo 255.',
+            'email.required' => 'El correo electrónico es obligatorio.',
+            'email.email' => 'El correo electrónico no es válido.',
+            'email.max' => 'El correo electrónico debe tener maximo 255.',
+            'email.unique' => 'El correo electrónico ya está registrado.',
+            'password.required' => 'La contraseña es obligatoria.',
+            'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
         ]);
 
         if ($validator->fails()) {
@@ -76,6 +85,26 @@ class UserController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Ocurrió un error inesperado.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+    /**
+     * Logout User.
+     */
+    public function logout(Request $request)
+    {
+        try {
+            $request->user()->currentAccessToken()->delete();
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'Sesión cerrada.'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Ocurrió un error al cerrar sesión.',
                 'error' => $e->getMessage()
             ], 500);
         }

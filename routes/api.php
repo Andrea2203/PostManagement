@@ -14,4 +14,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('posts/{categoryId}', [PostController::class, 'listCategory']);
     Route::post('category', [CategoryController::class, 'create']);
     Route::get('categories', [CategoryController::class, 'index']);
+    Route::post('/logout', [UserController::class, 'logout']);
 });
