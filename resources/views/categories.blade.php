@@ -72,48 +72,5 @@
             });
         });
     });
-
-    async function loadInformation() {
-        const token = localStorage.getItem('auth_token'); 
-        if (!token) {
-            Swal.fire({
-                    icon: 'error',
-                    title: 'Usuario no autenticado',
-                    confirmButtonText: 'Aceptar'
-                });
-            window.location.href = '/categories'; 
-        }
-        try {
-            const categoriesContainer = document.getElementById('categories-container');
-            categoriesContainer.innerHTML = '';
-            const response = await axios.get('/api/categories', {
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Accept': 'application/json',
-                }
-            });
-            const categories = response.data.data; 
-            categories.forEach(category => {
-                const card = document.createElement('div');
-                card.classList.add('col-md-3', 'm-2', 'text-bg-light', 'card');
-                const cardInner = document.createElement('div');
-                cardInner.classList.add('card', 'mb-4');
-                const cardBody = document.createElement('div');
-                cardBody.classList.add('card-body');
-                cardBody.textContent = category.name;
-                card.appendChild(cardBody);
-                categoriesContainer.appendChild(card);
-            });
-        } catch (error) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error al cargar las categorias',
-                confirmButtonText: 'Aceptar'
-            });
-        }
-    }
-    window.onload = loadInformation;
-
-
     </script>
 @endsection

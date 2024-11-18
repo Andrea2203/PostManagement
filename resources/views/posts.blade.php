@@ -53,9 +53,13 @@
             }
         })
         .then(response => {
-            
+            Swal.fire({
+                    icon: 'success',
+                    title: 'Categoria creada exitosamente',
+                    confirmButtonText: 'Aceptar'
+                });
+            cargarCategorias();
             document.getElementById('PostForm').reset();
-            window.location.href = '/posts'; 
         })
         .catch(error => {
             var errors = error.response.data.errors;
