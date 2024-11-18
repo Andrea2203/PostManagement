@@ -29,14 +29,17 @@ npm run dev
 1. Inicio de sesión
 ```
 http://127.0.0.1:8000/login
+http://3.140.159.213/login
 ```
 1. Registrarse
 ```
 http://127.0.0.1:8000/register
+http://3.140.159.213/register
 ```
 1. Creacion y lista de Post
 ```
 http://127.0.0.1:8000/posts
+http://3.140.159.213/posts
 ```
 
 
@@ -116,7 +119,8 @@ Authorization: Bearer token
 ```json
 {
     "title": "Post Nuevo",
-    "content": "Este es un post"
+    "content": "Este es un post",
+    "categoryid": "b15ddcd7-cd2d-4aa2-b9c0-86e7e54737b2"
 }
 ```
 #### Respuesta correcta:
@@ -286,17 +290,31 @@ Authorization: Bearer token
     "success": true,
     "data": [
         {
-            "id": "7cecb0b9-4de6-46fd-863f-4710d2ff6d69",
-            "name": "Acción",
-            "created_at": "2024-11-09T06:20:50.000000Z",
-            "updated_at": "2024-11-09T06:20:50.000000Z"
-        },
-        {
-            "id": "1f9d6fc6-6b12-4fd2-85ca-ea4c3b94d227",
+            "id": "3211afb9-6bc3-47fb-86bb-47d54e36ff81",
             "name": "Comedia",
-            "created_at": "2024-11-09T06:39:30.000000Z",
-            "updated_at": "2024-11-09T06:39:30.000000Z"
-        }
+            "created_at": "2024-11-10T05:10:40.000000Z",
+            "updated_at": "2024-11-10T05:10:40.000000Z",
+            "posts": [
+                {
+                    "id": "76a3ce0e-3e6e-4d7b-8ff3-ac8e80aed799",
+                    "title": "Prueba",
+                    "content": "Post de comedia",
+                    "userid": "5b1690e1-ed50-4fcf-8cdd-3a57a96900fc",
+                    "categoryid": "3211afb9-6bc3-47fb-86bb-47d54e36ff81",
+                    "created_at": "2024-11-10T05:11:01.000000Z",
+                    "updated_at": "2024-11-10T05:11:01.000000Z"
+                },
+                {
+                    "id": "ae11438e-12fc-4c81-b52a-ff8fa6dacd7b",
+                    "title": "Prueba",
+                    "content": "Prueba",
+                    "userid": "0c2946ff-638c-41de-96a6-defa00bf7b3e",
+                    "categoryid": "3211afb9-6bc3-47fb-86bb-47d54e36ff81",
+                    "created_at": "2024-11-18T22:46:28.000000Z",
+                    "updated_at": "2024-11-18T22:46:28.000000Z"
+                }
+            ]
+        },
     ]
 }
 ```
