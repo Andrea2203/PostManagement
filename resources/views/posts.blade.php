@@ -120,6 +120,8 @@
             const data = response.data.data; 
             const tabsContainer = document.getElementById('tabsCategories');
             const tabContentContainer = document.getElementById('tabContent');
+            tabsContainer.value= ''
+            tabContentContainer.value= ''
             data.forEach((categoria, index)=> {
                 const tab = document.createElement('li');
                     tab.classList.add('nav-item');
